@@ -1,0 +1,36 @@
+{
+  "name": "mithril-form-demo",
+  "version": "1.0.0",
+  "description": "An example of using mithril form",
+  "main": "index.js",
+  "scripts": {
+    "build": "node_modules/.bin/browserify -g uglifyify ./index.js --noparse clone > ./index.bundle.js",
+    "watch:js": "node_modules/.bin/watchify -d -o ./index.bundle.js index.js",
+    "watch:css": "nodemon -w css -e 'css' --exec 'cat css/*.css > style.bundle.css'",
+    "watch": "npm run watch:js & npm run watch:css",
+    "serve": "node_modules/.bin/ws -d ./ --spa index.html",
+    "start": "npm run watch & npm run serve",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "semistandard": {
+    "ignore": [
+      "index.bundle.js"
+    ]
+  },
+  "devDependencies": {
+    "browserify": "^16.5.2",
+    "hyperx": "^2.5.4",
+    "local-web-server": "^4.2.1",
+    "semistandard": "^14.2.3",
+    "uglifyify": "^5.0.2",
+    "watchify": "^3.11.1",
+    "hyperscript": "^2.0.2",
+    "nodemon": "^2.0.4"
+  },
+  "dependencies": {
+    "mithril": "^2.0.4"
+  }
+}

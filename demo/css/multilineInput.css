@@ -1,0 +1,16 @@
+mui-multiline-input textarea:focus {
+  border-color: blue;
+  outline: none;
+}
+mui-multiline-input textarea {
+  display: block;
+  font-family: arial;
+  font-weight: bold;
+  font-size: 100%;
+  width: 100%;
+  max-width: 100%;
+  min-width: 100%;
+  min-height: 100px;
+  border: 2px solid black;
+  padding: 3px;
+}

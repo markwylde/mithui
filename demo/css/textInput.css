@@ -1,0 +1,13 @@
+mui-text-input input:focus {
+  border-color: blue;
+  outline: none;
+}
+mui-text-input input {
+  display: block;
+  font-family: arial;
+  font-weight: bold;
+  font-size: 100%;
+  width: 100%;
+  border: 2px solid black;
+  padding: 3px;
+}

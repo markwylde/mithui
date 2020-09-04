@@ -1,0 +1,76 @@
+mui-file-picker {
+  display: block;
+  background-color: #e8e8e8;
+  border: 2px solid black;
+  position: relative;
+}
+mui-file-picker > input {
+  cursor: pointer;
+}
+mui-file-picker input:before:hover {
+  background-color: pink;
+}
+mui-file-picker li input {
+  cursor: text;
+}
+mui-file-picker > div.dragover {
+  background-color: rgb(67, 78, 64);
+  color: white;
+  border: 2px dashed white;
+}
+mui-file-picker > div {
+  border: 2px solid transparent;
+  padding: 8px;
+  text-align: center;
+}
+mui-file-picker > div > input {
+  cursor: pointer;
+  opacity: 0;
+  min-height: 20px;
+  margin-top: -34px;
+  display: block;
+}
+mui-file-picker ul {
+  padding: 0;
+  margin: 0;
+}
+mui-file-picker li {
+  border-bottom: 1px solid #e0e0e0;
+  list-style: none;
+  padding: 7px;
+}
+mui-file-picker li.info {
+  text-align: center;
+}
+mui-file-picker li:not(.info) {
+  display: flex;
+  padding-left: 30px;
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDM4MDAgNDgwMCI+DQogPGc+PHBhdGggZmlsbD0iI0VFRSIgZD0iTTAgNDgwMGgzODAwVjg0MEwyOTYwIDBIMCIvPjxwYXRoIGZpbGw9IiNCQkIiIGQ9Ik0yOTYwIDg0MGg4NDBMMjk2MCAwIi8+PHBhdGggZmlsbD0iIzg4OCIgZD0iTTM4MDAgMTY4MFY4NDBoLTg0MCIvPjwvZz4NCiA8Zz48cGF0aCBmaWxsPSIjNTU1IiBkPSJNOTAwIDE5NzZoMjAwMHYtMjEySDkwMG0wIDY3MGgyMDAwdi0yMTFIOTAwbTAgNjcwaDIwMDB2LTIxMkg5MDBtMCA2MzVoMTIwMHYtMTc2SDkwMCIvPjwvZz4NCjwvc3ZnPg==);
+  background-color: white;
+  background-repeat: no-repeat;
+  background-size: 18px;
+  background-position: left 5px center;
+}
+
+mui-file-picker li input {
+  border-color: #dadada;
+}
+mui-file-picker li button {
+  padding: 5px 10px 4px 10px;
+  font-size: 10px;
+  background-color: #ab2424;
+}
+
+mui-file-picker input:focus {
+  border-color: blue;
+  outline: none;
+}
+mui-file-picker input {
+  display: block;
+  font-family: arial;
+  font-weight: bold;
+  font-size: 100%;
+  width: 100%;
+  border: 2px solid black;
+  padding: 3px;
+}
