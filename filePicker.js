@@ -1,14 +1,17 @@
-const mithril = require('mithril');
-const html = require('hyperx')(mithril);
+const m = require('mithril');
 
-function filePicker (vnode) {
-  const options = vnode.attrs;
-
-  const state = {
-    value: options.initialValue || ''
+function handleInput (options, state, file) {
+  return event => {
+    file.name = event.target.value;
+    options.onInput && options.onInput(event, {
+      name: options.name,
+      value: state.value
+    });
   };
+}
 
-  function handleChange (event) {
+function handleChange (options, state) {
+  return event => {
     const files = Array.from(event.target.files);
     state.value = state.value.concat(files.map(file => {
       return {
@@ -19,52 +22,67 @@ function filePicker (vnode) {
 
     event.target.value = null;
 
-    options.onInput && options.onInput(event, state);
-  }
+    options.onInput && options.onInput(event, {
+      name: options.name,
+      value: state.value
+    });
+  };
+}
 
-  function removeFile (event, fileToDelete) {
+function addDragOverClass (event) {
+  event.target.parentNode.classList.add('dragover');
+}
+
+function removeDragOverClass (event) {
+  event.target.parentNode.classList.remove('dragover');
+}
+
+function removeFile (options, state, fileToDelete) {
+  return event => {
     state.value = state.value.filter(file => file !== fileToDelete);
-    options.onInput && options.onInput(event, state);
-  }
+    options.onInput && options.onInput(event, {
+      name: options.name,
+      value: state.value
+    });
+  };
+}
 
-  function addDragOverClass (event) {
-    event.target.parentNode.classList.add('dragover');
-  }
-
-  function removeDragOverClass (event) {
-    event.target.parentNode.classList.remove('dragover');
-  }
+function filePicker (vnode) {
+  const state = {
+    value: vnode.attrs.initialValue || ''
+  };
 
   return {
-    oncreate: (vnode) => {
-      state.name = vnode.attrs.name;
-    },
-
     view: (vnode) => {
       const options = vnode.attrs;
 
-      return html`
-        <mui-file-picker>
-          <ul>
-            ${state.value.map((file, fileIndex) => html`
-              <li key=${file}>
-                <input oncreate=${event => { event.dom.value = file.name; }}" />
-                <button onclick=${event => removeFile(event, file)}>X</button>
-              </li>
-            `)}
-          </ul>
-          <div>
-            Click or drag files here to upload
-            <input ondragenter=${addDragOverClass} ondragleave=${removeDragOverClass} ondrop=${removeDragOverClass} type="file"
-                  multiple="multiple"
-                  id=${options.id}
-                  ${options.autoFocus ? 'autofocus' : ''}
-                  name="${options.name}"
-                  onchange=${handleChange}
-              />
-          </div>
-        </mui-file-picker>
-      `;
+      return m('mui-file-picker',
+        m('ul', state.value.map((file, fileIndex) =>
+          m('li', { key: file },
+            m('input',
+              {
+                oninput: handleInput(options, state, file),
+                oncreate: event => { event.dom.value = file.name; }
+              }
+            ),
+            m('button', { onclick: removeFile(options, state, file) }, 'X')
+          )
+        )),
+        m('div',
+          'Click or drag files here to upload',
+          m('input', {
+            ondragenter: addDragOverClass,
+            ondragleave: removeDragOverClass,
+            ondrop: removeDragOverClass,
+            type: 'file',
+            multiple: 'multiple',
+            id: options.id,
+            autofocus: options.autoFocus,
+            name: options.name,
+            onchange: handleChange(options, state)
+          })
+        )
+      );
     }
   };
 }

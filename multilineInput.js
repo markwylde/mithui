@@ -1,29 +1,39 @@
-const mithril = require('mithril');
-const html = require('hyperx')(mithril);
+const m = require('mithril');
 const autosize = require('autosize');
 
-function multilineInput (options) {
-  const state = {};
-
-  function handleInput (event, onInput) {
+function handleInput (state, options) {
+  return event => {
     state.value = event.target.value;
-    onInput && onInput(event, state);
-  }
+    options.onInput && options.onInput(event, {
+      name: options.name,
+      value: state.value
+    });
+  };
+}
+
+function multilineInput (vnode) {
+  const state = {
+    value: vnode.attrs.initialValue || ''
+  };
 
   return {
     oncreate: (vnode) => {
-      state.name = vnode.attrs.name;
-      vnode.dom.querySelector('textarea').value = vnode.attrs.initialValue || '';
-      autosize(vnode.dom);
+      const textareaElement = vnode.dom.querySelector('textarea');
+      textareaElement.value = state.value;
+      autosize(textareaElement);
     },
 
     view: (vnode) => {
       const options = vnode.attrs;
-      return html`
-        <mui-multiline-input>
-          <textarea id=${options.id} ${options.autoFocus ? 'autofocus' : ''} name="${options.name}" oninput=${event => handleInput(event, options.onInput)}></textarea>
-        </mui-multiline-input>
-      `;
+
+      return m('mui-multiline-input',
+        m('textarea', {
+          id: options.id,
+          autoFocus: options.autoFocus,
+          name: options.name,
+          oninput: handleInput(state, options)
+        })
+      );
     }
   };
 }

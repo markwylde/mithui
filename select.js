@@ -1,32 +1,40 @@
-const mithril = require('mithril');
-const html = require('hyperx')(mithril);
+const m = require('mithril');
 
-function select (options) {
-  const state = {};
-
-  function handleInput (event, onInput) {
+function handleInput (state, options) {
+  return event => {
     state.value = event.target.value;
-    onInput && onInput(event, state);
-  }
+    options.onInput && options.onInput(event, {
+      name: options.name,
+      value: state.value
+    });
+  };
+}
+
+function select (vnode) {
+  const state = {
+    value: vnode.attrs.initialValue || false
+  };
 
   return {
     oncreate: (vnode) => {
-      state.name = vnode.attrs.name;
-      vnode.dom.querySelector('select').value = vnode.attrs.initialValue || '';
+      vnode.dom.querySelector('select').value = state.value;
     },
 
     view: (vnode) => {
       const options = vnode.attrs;
 
-      return html`
-        <mui-select>
-          <select id=${options.id} ${options.autoFocus ? 'autofocus' : ''} name="${options.name}" oninput=${event => handleInput(event, options.onInput)}>
-            ${options.options.map(option => html`
-              <option value=${option.value}>${option.label}</option>
-            `)}
-          </select>
-        </mui-select>
-      `;
+      return m('mui-select',
+        m('select', {
+          id: options.id,
+          autoFocus: options.autoFocus,
+          name: options.name,
+          oninput: handleInput(state, options)
+        },
+        options.options.map(option =>
+          m('option', { value: option.value }, option.label)
+        )
+        )
+      );
     }
   };
 }

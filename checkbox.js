@@ -1,29 +1,40 @@
-const mithril = require('mithril');
-const html = require('hyperx')(mithril);
+const m = require('mithril');
 
-function checkbox (options) {
-  const state = {};
-
-  function handleInput (event, onInput) {
+function handleInput (state, options) {
+  return event => {
     state.value = !!event.target.checked;
-    onInput && onInput(event, state);
-  }
+    options.onInput && options.onInput(event, {
+      name: options.name,
+      value: state.value
+    });
+  };
+}
+
+function checkbox (vnode) {
+  const state = {
+    value: vnode.attrs.initialValue || false
+  };
 
   return {
     oncreate: (vnode) => {
-      state.name = vnode.attrs.name;
-      vnode.dom.querySelector('input').checked = vnode.attrs.initialValue || false;
+      vnode.dom.querySelector('input').checked = state.value;
     },
 
     view: (vnode) => {
-      const { id, autoFocus, name, label, onInput } = vnode.attrs;
+      const options = vnode.attrs;
 
-      return html`
-        <mui-checkbox>
-          <input id=${id} type="checkbox" ${autoFocus ? 'autofocus' : ''} name="${name}" oninput=${event => handleInput(event, onInput)} />
-          <label for=${id}>${label}</label>
-        </mui-checkbox>
-      `;
+      return m('mui-checkbox',
+        m('input', {
+          id: options.id,
+          type: 'checkbox',
+          autoFocus: options.autoFocus,
+          name: options.name,
+          oninput: handleInput(state, options)
+        }),
+        m('label', {
+          for: options.id
+        }, options.label)
+      );
     }
   };
 }

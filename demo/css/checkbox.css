@@ -25,7 +25,8 @@ mui-form mui-checkbox label:after {
   content: '';
 }
 mui-form mui-checkbox label {
-  display: inline;
+  display: inline-block;
+  margin-left: 8px;
 }
 mui-form mui-checkbox input {
   width: auto;
