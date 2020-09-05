@@ -4,7 +4,7 @@
   "description": "An example of using mithril form",
   "main": "index.js",
   "scripts": {
-    "build": "node_modules/.bin/browserify -g uglifyify ./index.js --noparse clone > ./index.bundle.js",
+    "build": "cat css/*.css > style.bundle.css && node_modules/.bin/browserify -g uglifyify ./index.js --noparse clone > ./index.bundle.js",
     "watch:js": "node_modules/.bin/watchify -d -o ./index.bundle.js index.js",
     "watch:css": "nodemon -w css -e 'css' --exec 'cat css/*.css > style.bundle.css'",
     "watch": "npm run watch:js & npm run watch:css",
