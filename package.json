@@ -1,6 +1,6 @@
 {
   "name": "mithui",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A ui library for mithril.",
   "main": "index.js",
   "keywords": [],
