@@ -4,7 +4,7 @@ A ui library for mithril.
 [Live demo](https://mithui.onrender.com/)
 
 ## Screenshot
-<img src="demo/screenshot.png" width="200px" alt="Screenshot of Demo" />
+<img src="demo/screenshot.png" width="300px" alt="Screenshot of Demo" />
 
 ## Available Components
 ### Forms
