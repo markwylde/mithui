@@ -1,7 +1,7 @@
 # mithui
 A ui library for mithril.
 
-[Live demo](https://mithril-ui.onrender.com/)
+[Live demo](https://mithui.onrender.com/)
 
 ## Screenshot
 ![Screenshot of Demo](demo/screenshot.png)
