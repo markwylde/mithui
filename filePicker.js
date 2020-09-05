@@ -39,6 +39,7 @@ function removeDragOverClass (event) {
 
 function removeFile (options, state, fileToDelete) {
   return event => {
+    event.preventDefault();
     state.value = state.value.filter(file => file !== fileToDelete);
     options.onInput && options.onInput(event, {
       name: options.name,
@@ -49,7 +50,7 @@ function removeFile (options, state, fileToDelete) {
 
 function filePicker (vnode) {
   const state = {
-    value: vnode.attrs.initialValue || ''
+    value: vnode.attrs.initialValue || {}
   };
 
   return {
