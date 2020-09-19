@@ -6,6 +6,15 @@
   "keywords": [],
   "author": "",
   "license": "MIT",
+  "scripts": {
+    "demo:build": "node_modules/.bin/browserify -g uglifyify ./demo/index.js --noparse clone > ./demo/index.bundle.js",
+    "demo:watch:js": "node_modules/.bin/watchify -d -o ./demo/index.bundle.js ./demo/index.js",
+    "demo:watch:css": "cd demo && nodemon -w css -e 'css' --exec 'cat css/*.css > style.bundle.css'",
+    "demo:watch": "npm run demo:watch:js",
+    "demo:serve": "node_modules/.bin/ws -d ./demo --spa index.html",
+    "demo:start": "npm run demo:watch & npm run demo:serve",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "semistandard": {
     "ignore": [
       "index.bundle.js"
@@ -19,6 +28,10 @@
     "browserify": "^16.5.2",
     "local-web-server": "^4.2.1",
     "semistandard": "^14.2.3",
-    "watchify": "^3.11.1"
+    "watchify": "^3.11.1",
+    "hyperx": "^2.5.4",
+    "uglifyify": "^5.0.2",
+    "hyperscript": "^2.0.2",
+    "nodemon": "^2.0.4"
   }
 }

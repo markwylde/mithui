@@ -1,7 +1,5 @@
-const mithril = require('mithril');
-const html = require('hyperx')(mithril);
-
-window.m = mithril;
+const m = require('mithril');
+const html = require('hyperx')(m);
 
 const mui = require('../');
 
@@ -9,126 +7,145 @@ const eventLog = [];
 let errors = window.errors = {};
 
 function demoApp () {
-  return html`
-    <main >
-      <section>
-        <h1>Example Form</h1>
+  return {
+    view: () => {
+      return html`
+        <main >
+          <section>
+            <h1>Dropdown</h1>
+            <h2>Text Based</h2>
+            ${m(mui.dropdown, { class: 'with-icon full-width' }, [
+              m('a', { href: '#one' }, 'Item 1'),
+              m('a', { href: '#one' }, 'Item 2'),
+              m('a', { href: '#one' }, 'Item 3')
+            ])}
 
-        <h2>Simple form</h2>
-        <div class="exampleFormContainer">
-        ${mithril(mui.form, {
-          fields: [
-            {
-              name: 'firstName',
-              label: 'First Name',
-              errors: errors.firstName,
-              component: mui.textInput,
-              autoFocus: true,
-              initialValue: 'Joe'
-            },
-            {
-              name: 'lastName',
-              label: 'Last Name',
-              errors: errors.lastName,
-              component: mui.textInput,
-              initialValue: 'Bloggs'
-            },
-            {
-              name: 'bio',
-              label: 'Profile Bio',
-              errors: errors.lastName,
-              component: mui.multilineInput,
-              initialValue: 'Some cool information about me'
-            },
-            {
-              name: 'location',
-              label: 'Location',
-              errors: errors.location,
-              component: mui.select,
-              options: [
+            <h2>Icon Based</h2>
+            ${m(mui.dropdown, { class: '', head: '☰' }, [
+              m('a', { href: '#one' }, 'Item 1'),
+              m('a', { href: '#one' }, 'Item 2'),
+              m('a', { href: '#one' }, 'Item 3')
+            ])}
+
+            <h1>Example Form</h1>
+
+            <h2>Simple form</h2>
+            <div class="exampleFormContainer">
+            ${m(mui.form, {
+              fields: [
                 {
-                  value: 'au',
-                  label: 'Australia'
+                  name: 'firstName',
+                  label: 'First Name',
+                  errors: errors.firstName,
+                  component: mui.textInput,
+                  autoFocus: true,
+                  initialValue: 'Joe'
                 },
                 {
-                  value: 'uk',
-                  label: 'United Kingdom'
+                  name: 'lastName',
+                  label: 'Last Name',
+                  errors: errors.lastName,
+                  component: mui.textInput,
+                  initialValue: 'Bloggs'
+                },
+                {
+                  name: 'bio',
+                  label: 'Profile Bio',
+                  errors: errors.lastName,
+                  component: mui.multilineInput,
+                  initialValue: 'Some cool information about me'
+                },
+                {
+                  name: 'location',
+                  label: 'Location',
+                  errors: errors.location,
+                  component: mui.select,
+                  options: [
+                    {
+                      value: 'au',
+                      label: 'Australia'
+                    },
+                    {
+                      value: 'uk',
+                      label: 'United Kingdom'
+                    }
+                  ],
+                  initialValue: 'uk'
+                },
+                {
+                  name: 'active',
+                  label: 'Active',
+                  errors: errors.active,
+                  component: mui.checkbox,
+                  initialValue: true
+                },
+                {
+                  name: 'pictures',
+                  label: 'Profile Pictures',
+                  errors: errors.picture,
+                  prefix: '/data/avatars/',
+                  component: mui.filePicker,
+                  multiple: true,
+                  initialValue: [{
+                    name: 'bbb.txt',
+                    id: 12
+                  }]
+                },
+                {
+                  name: 'failOnSubmit',
+                  label: 'Fail on submit',
+                  errors: errors.failOnSubmit,
+                  component: mui.checkbox,
+                  initialValue: false
                 }
               ],
-              initialValue: 'uk'
-            },
-            {
-              name: 'active',
-              label: 'Active',
-              errors: errors.active,
-              component: mui.checkbox,
-              initialValue: true
-            },
-            {
-              name: 'pictures',
-              label: 'Profile Pictures',
-              errors: errors.picture,
-              prefix: '/data/avatars/',
-              component: mui.filePicker,
-              multiple: true,
-              initialValue: [{
-                name: 'bbb.txt',
-                id: 12
-              }]
-            },
-            {
-              name: 'failOnSubmit',
-              label: 'Fail on submit',
-              errors: errors.failOnSubmit,
-              component: mui.checkbox,
-              initialValue: false
-            }
-          ],
-          onSubmit: (event, state) => {
-            event.preventDefault();
-            errors = {};
-            render();
+              onSubmit: (event, state) => {
+                event.preventDefault();
+                errors = {};
+                render();
 
-            const button = event.target.querySelector('form > button');
-            button.disabled = true;
+                const button = event.target.querySelector('form > button');
+                button.disabled = true;
 
-            eventLog.unshift(['submitted', JSON.stringify(state, null, 2)]);
+                eventLog.unshift(['submitted', JSON.stringify(state, null, 2)]);
 
-            setTimeout(() => {
-              button.disabled = false;
-              if (state.failOnSubmit) {
-                errors = {
-                  firstName: ['Must be unique'],
-                  lastName: ['Must be valid']
-                };
+                setTimeout(() => {
+                  button.disabled = false;
+                  if (state.failOnSubmit) {
+                    errors = {
+                      firstName: ['Must be unique'],
+                      lastName: ['Must be valid']
+                    };
+                  }
+                  render();
+                }, 500);
+              },
+              onInput: state => {
+                eventLog.unshift(['inputted', JSON.stringify(state, null, 2)]);
+                render();
               }
-              render();
-            }, 500);
-          },
-          onInput: state => {
-            eventLog.unshift(['inputted', JSON.stringify(state, null, 2)]);
-            render();
-          }
-        })}
-        </div>
+            })}
+            </div>
 
-        <ul>
-        ${eventLog.map(entry => {
-          return html`
-            <li>
-              <strong>${entry[0]}</strong>
-              <pre><code>${entry[1]}</code></pre>
-          </li>
-          `;
-        })}
-        </ul>
-      </section>
-    </main>
-  `;
+            <ul>
+            ${eventLog.map(entry => {
+              return html`
+                <li>
+                  <strong>${entry[0]}</strong>
+                  <pre><code>${entry[1]}</code></pre>
+              </li>
+              `;
+            })}
+            </ul>
+          </section>
+        </main>
+      `;
+    }
+  };
 }
 
 function render () {
-  mithril.render(document.body, demoApp());
+  m.mount(document.body, demoApp());
 }
 
 document.addEventListener('DOMContentLoaded', function () {

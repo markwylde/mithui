@@ -7,6 +7,15 @@ A ui library for mithril.
 <img src="demo/screenshot.png" width="300px" alt="Screenshot of Demo" />
 
 ## Available Components
+### Dropdown
+```javascript
+mithril(mui.dropdown, [
+  m('div', 'Item 1'),
+  m('div', 'Item 2'),
+  m('div', 'Item 3'),
+])
+```
+
 ### Forms
 ### Text Input
 ```javascript

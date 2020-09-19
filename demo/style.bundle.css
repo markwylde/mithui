@@ -32,6 +32,10 @@ mui-form mui-checkbox input {
   width: auto;
 }
 
+[hidden] {
+  display: none;
+}
+
 mui-form .form-group {
   margin-bottom: 10px;
 }
@@ -60,6 +64,52 @@ mui-form .form-errors li {
   background-position: left center;
   color: rgb(105 23 23);
   margin-bottom: 3px;
+}
+mui-dropdown {
+  display: inline-block;
+}
+
+mui-dropdown-head {
+  display: inline-block;
+  font-family: arial;
+  font-weight: bold;
+  font-size: 100%;
+  border: 2px solid black;
+  padding: 3px;
+  cursor: pointer;
+}
+
+mui-dropdown-body {
+  background-color: white;
+  position: absolute;
+  display: inline-block;
+  font-family: arial;
+  font-weight: bold;
+  font-size: 100%;
+  border: 2px solid black;
+  padding: 3px;
+}
+
+mui-dropdown.full-width mui-dropdown-head {
+  width: 100%;
+}
+
+mui-dropdown.with-icon mui-dropdown-head {
+  padding-right: 25px;
+  background: transparent;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+  background-repeat: no-repeat;
+  background-position-x: 100%;
+  background-position-y: center;
+}
+
+mui-dropdown-body {
+  display: block;
+}
+
+mui-dropdown > mui-dropdown-body > * {
+  display: block;
+  padding: 5px;
 }
 mui-file-picker {
   display: block;

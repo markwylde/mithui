@@ -1,4 +1,7 @@
 module.exports = {
+  dropdown: require('./dropdown'),
+
+  /* FORMS */
   form: require('./form'),
   select: require('./select'),
   textInput: require('./textInput'),
