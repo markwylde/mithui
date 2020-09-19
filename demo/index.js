@@ -16,15 +16,15 @@ function demoApp () {
             <h2>Text Based</h2>
             ${m(mui.dropdown, { class: 'with-icon full-width' }, [
               m('a', { href: '#one' }, 'Item 1'),
-              m('a', { href: '#one' }, 'Item 2'),
-              m('a', { href: '#one' }, 'Item 3')
+              m('a', { href: '#two' }, 'Item 2'),
+              m('a', { href: '#three' }, 'Item 3')
             ])}
 
             <h2>Icon Based</h2>
             ${m(mui.dropdown, { class: '', head: '☰' }, [
-              m('a', { href: '#one' }, 'Item 1'),
-              m('a', { href: '#one' }, 'Item 2'),
-              m('a', { href: '#one' }, 'Item 3')
+              m('a', { href: '#four' }, 'Item 4'),
+              m('a', { href: '#five' }, 'Item 5'),
+              m('a', { href: '#six' }, 'Item 6')
             ])}
 
             <h1>Example Form</h1>
