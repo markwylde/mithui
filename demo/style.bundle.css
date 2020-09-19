@@ -66,6 +66,7 @@ mui-form .form-errors li {
   margin-bottom: 3px;
 }
 mui-dropdown {
+  position: relative;
   outline: none;
   display: inline-block;
 }
@@ -85,6 +86,7 @@ mui-dropdown-head {
 }
 
 mui-dropdown-body {
+  z-index: 100000;
   background-color: white;
   position: absolute;
   display: inline-block;
@@ -118,13 +120,14 @@ mui-dropdown > mui-dropdown-body > * {
   padding: 5px;
 }
 
-mui-dropdown.align-right {
-  position: relative;
-}
-
 mui-dropdown.align-right mui-dropdown-body {
   min-width: 24px;
   right: 0;
+}
+
+mui-dropdown.align-up mui-dropdown-body {
+  bottom: 0;
+  margin-bottom: calc(100% + 6px);
 }
 mui-file-picker {
   display: block;

@@ -2,7 +2,8 @@ const m = require('mithril');
 
 function dropdown (vnode) {
   let collapsed = true;
-  let overideAlignRight = false;
+  let forceAlignLeft = false;
+  let forceAlignTop = false;
 
   function handleDocumentMouseUp (event) {
     if (!vnode.dom.contains(event.target)) {
@@ -15,15 +16,29 @@ function dropdown (vnode) {
     collapsed = false;
     const dropdownHead = vnode.dom.querySelector('mui-dropdown-head');
     const dropdownBody = vnode.dom.querySelector('mui-dropdown-body');
-    dropdownBody.style.minWidth = dropdownHead.offsetWidth + 'px';
+    dropdownBody.style.opacity = 0;
 
-    if (parseInt(dropdownHead.parentNode.offsetLeft) < 100) {
-      overideAlignRight = true;
-    } else {
-      overideAlignRight = false;
-    }
+    window.requestAnimationFrame(() => {
+      dropdownBody.style.minWidth = dropdownHead.offsetWidth + 'px';
 
-    m.redraw();
+      if (parseInt(dropdownHead.parentNode.offsetLeft) < 100) {
+        forceAlignLeft = true;
+      } else {
+        forceAlignLeft = false;
+      }
+
+      if (parseInt(dropdownBody.offsetHeight) + parseInt(dropdownBody.parentNode.offsetTop) > (window.scrollY + window.innerHeight - 50)) {
+        forceAlignTop = true;
+      } else {
+        forceAlignTop = false;
+      }
+
+      m.redraw();
+
+      window.requestAnimationFrame(() => {
+        dropdownBody.style.opacity = 1;
+      });
+    });
   }
 
   function handleFocusOut (event) {
@@ -51,10 +66,14 @@ function dropdown (vnode) {
     },
 
     view: (vnode) => {
-      let classes = vnode.attrs.class;
+      let classes = vnode.attrs.class || '';
 
-      if (overideAlignRight) {
+      if (forceAlignLeft) {
         classes = classes.replace('align-right', '');
+      }
+
+      if (forceAlignTop && !classes.includes('align-up')) {
+        classes = classes + ' align-up';
       }
 
       return m('mui-dropdown', { tabindex: 0, class: classes },
