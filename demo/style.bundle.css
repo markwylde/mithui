@@ -105,11 +105,21 @@ mui-dropdown.with-icon mui-dropdown-head {
 
 mui-dropdown-body {
   display: block;
+  white-space: nowrap;
 }
 
 mui-dropdown > mui-dropdown-body > * {
   display: block;
   padding: 5px;
+}
+
+mui-dropdown.align-right {
+  position: relative;
+}
+
+mui-dropdown.align-right mui-dropdown-body {
+  min-width: 24px;
+  right: 0;
 }
 mui-file-picker {
   display: block;

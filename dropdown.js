@@ -2,6 +2,7 @@ const m = require('mithril');
 
 function dropdown (vnode) {
   let collapsed = true;
+  let overideAlignRight = false;
 
   function handleDocumentMouseUp (event) {
     if (!vnode.dom.contains(event.target)) {
@@ -13,7 +14,15 @@ function dropdown (vnode) {
   function handleFocusIn (event) {
     collapsed = false;
     const dropdownHead = vnode.dom.querySelector('mui-dropdown-head');
-    vnode.dom.querySelector('mui-dropdown-body').style.minWidth = dropdownHead.offsetWidth + 'px';
+    const dropdownBody = vnode.dom.querySelector('mui-dropdown-body');
+    dropdownBody.style.minWidth = dropdownHead.offsetWidth + 'px';
+
+    if (parseInt(dropdownHead.parentNode.offsetLeft) < 100) {
+      overideAlignRight = true;
+    } else {
+      overideAlignRight = false;
+    }
+
     m.redraw();
   }
 
@@ -42,7 +51,13 @@ function dropdown (vnode) {
     },
 
     view: (vnode) => {
-      return m('mui-dropdown', { tabindex: 0, class: vnode.attrs.class },
+      let classes = vnode.attrs.class;
+
+      if (overideAlignRight) {
+        classes = classes.replace('align-right', '');
+      }
+
+      return m('mui-dropdown', { tabindex: 0, class: classes },
         m('mui-dropdown-head', { onmousedown: handleHeadClick }, vnode.attrs.head || 'Selected: one'),
         m('mui-dropdown-body', { hidden: collapsed }, vnode.children)
       );

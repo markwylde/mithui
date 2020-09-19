@@ -27,6 +27,23 @@ function demoApp () {
               m('a', { href: '#six' }, 'Item 6')
             ])}
 
+            <h2>Aligned Right Based</h2>
+            <h3>With Space</h3>
+            <div style="width: 100%; max-width: 400px; text-align: right;">
+              ${m(mui.dropdown, { class: 'align-right', head: '☰' }, [
+                m('a', { href: '#four' }, 'Item 4'),
+                m('a', { href: '#five' }, 'Item 5'),
+                m('a', { href: '#six' }, 'Item 6')
+              ])}
+            </div>
+
+            <h3>Without Space</h3>
+            ${m(mui.dropdown, { class: 'align-right', head: '☰' }, [
+              m('a', { href: '#four' }, 'Item 4'),
+              m('a', { href: '#five' }, 'Item 5'),
+              m('a', { href: '#six' }, 'Item 6')
+            ])}
+
             <h1>Example Form</h1>
 
             <h2>Simple form</h2>
