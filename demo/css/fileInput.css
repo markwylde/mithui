@@ -55,10 +55,17 @@ mui-file-picker li:not(.info) {
 mui-file-picker li input {
   border-color: #dadada;
 }
+
+mui-file-picker li button:hover {
+  background-color: #691212;
+}
+
 mui-file-picker li button {
   padding: 5px 10px 4px 10px;
   font-size: 10px;
+  border: none;
   background-color: #ab2424;
+  color: white;
 }
 
 mui-file-picker input:focus {

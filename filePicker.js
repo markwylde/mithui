@@ -50,7 +50,7 @@ function removeFile (options, state, fileToDelete) {
 
 function filePicker (vnode) {
   const state = {
-    value: vnode.attrs.initialValue || {}
+    value: vnode.attrs.initialValue || []
   };
 
   return {

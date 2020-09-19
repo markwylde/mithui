@@ -7,7 +7,7 @@
   "author": "",
   "license": "MIT",
   "scripts": {
-    "demo:build": "node_modules/.bin/browserify -g uglifyify ./demo/index.js --noparse clone > ./demo/index.bundle.js",
+    "demo:build": "cat demo/css/*.css > demo/style.bundle.css && node_modules/.bin/browserify -g uglifyify ./demo/index.js --noparse clone > ./demo/index.bundle.js",
     "demo:watch:js": "node_modules/.bin/watchify -d -o ./demo/index.bundle.js ./demo/index.js",
     "demo:watch:css": "cd demo && nodemon -w css -e 'css' --exec 'cat css/*.css > style.bundle.css'",
     "demo:watch": "npm run demo:watch:js",
