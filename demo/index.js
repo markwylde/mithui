@@ -119,7 +119,7 @@ function demoApp () {
               onSubmit: (event, state) => {
                 event.preventDefault();
                 errors = {};
-                render();
+                m.redraw();
 
                 const button = event.target.querySelector('form > button');
                 button.disabled = true;
@@ -134,12 +134,12 @@ function demoApp () {
                       lastName: ['Must be valid']
                     };
                   }
-                  render();
+                  m.redraw();
                 }, 500);
               },
               onInput: state => {
                 eventLog.unshift(['inputted', JSON.stringify(state, null, 2)]);
-                render();
+                m.redraw();
               }
             })}
             </div>
@@ -161,10 +161,6 @@ function demoApp () {
   };
 }
 
-function render () {
-  m.mount(document.body, demoApp());
-}
-
 document.addEventListener('DOMContentLoaded', function () {
-  render();
+  m.mount(document.body, demoApp());
 });
