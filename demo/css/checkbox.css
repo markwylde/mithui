@@ -12,13 +12,14 @@ mui-checkbox input:focus {
   outline: none;
 }
 mui-checkbox input {
+  display: inline-block;
+  vertical-align: middle;
   border: 2px solid black;
   cursor: pointer;
   appearance: none;
   width: auto;
-  padding: 8px;
+  padding: 10px;
   margin: 0;
-  vertical-align: text-top;
 }
 
 mui-form mui-checkbox label:after {

@@ -12,13 +12,14 @@ mui-checkbox input:focus {
   outline: none;
 }
 mui-checkbox input {
+  display: inline-block;
+  vertical-align: middle;
   border: 2px solid black;
   cursor: pointer;
   appearance: none;
   width: auto;
-  padding: 8px;
+  padding: 10px;
   margin: 0;
-  vertical-align: text-top;
 }
 
 mui-form mui-checkbox label:after {
@@ -30,6 +31,11 @@ mui-form mui-checkbox label {
 }
 mui-form mui-checkbox input {
   width: auto;
+}
+
+html {
+  --input-padding: 5px;
+  --dropdown-padding: 5px;
 }
 
 [hidden] {
@@ -81,7 +87,7 @@ mui-dropdown-head {
   font-weight: bold;
   font-size: 100%;
   border: 2px solid black;
-  padding: 3px;
+  padding: var(--dropdown-padding);
   cursor: pointer;
 }
 
@@ -210,7 +216,7 @@ mui-file-picker input {
   font-size: 100%;
   width: 100%;
   border: 2px solid black;
-  padding: 3px;
+  padding: var(--input-padding);
 }
 mui-multiline-input textarea:focus {
   border-color: blue;
@@ -226,7 +232,7 @@ mui-multiline-input textarea {
   min-width: 100%;
   min-height: 100px;
   border: 2px solid black;
-  padding: 3px;
+  padding: var(--input-padding);
 }
 mui-select select:focus {
   border-color: blue;
@@ -238,7 +244,7 @@ mui-select select {
   outline: none;
   display: block;
   width: 100%;
-  padding: 3px 3px 3px 3px;
+  padding: var(--input-padding);
   border: 2px solid black;
   font-size: 100%;
 
@@ -261,5 +267,5 @@ mui-text-input input {
   font-size: 100%;
   width: 100%;
   border: 2px solid black;
-  padding: 3px;
+  padding: var(--input-padding);
 }

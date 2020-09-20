@@ -9,5 +9,5 @@ mui-text-input input {
   font-size: 100%;
   width: 100%;
   border: 2px solid black;
-  padding: 3px;
+  padding: var(--input-padding);
 }

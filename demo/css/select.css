@@ -8,7 +8,7 @@ mui-select select {
   outline: none;
   display: block;
   width: 100%;
-  padding: 3px 3px 3px 3px;
+  padding: var(--input-padding);
   border: 2px solid black;
   font-size: 100%;
 

@@ -1,3 +1,8 @@
+html {
+  --input-padding: 5px;
+  --dropdown-padding: 5px;
+}
+
 [hidden] {
   display: none;
 }
