@@ -63,6 +63,15 @@ function dropdownPage () {
               m('a', { href: '#six' }, 'Item 6'),
               m('a', { href: '#seven' }, 'Item 7')
             ])}
+
+            <h3>And top aligned</h3>
+            <div style="width: 100%; max-width: 400px; text-align: right;">
+              ${m(mui.dropdown, { class: 'align-right align-top', head: '☰' }, [
+                m('a', { href: '#four' }, 'Item 4'),
+                m('a', { href: '#five' }, 'Item 5'),
+                m('a', { href: '#six' }, 'Item 6')
+              ])}
+            </div>
           </section>
         </main>
       `;

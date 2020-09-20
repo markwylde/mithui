@@ -13,6 +13,10 @@ function dropdown (vnode) {
   }
 
   function handleFocusIn (event) {
+    if (!collapsed) {
+      return;
+    }
+
     collapsed = false;
     const dropdownHead = vnode.dom.querySelector('mui-dropdown-head');
     const dropdownBody = vnode.dom.querySelector('mui-dropdown-body');
@@ -42,8 +46,10 @@ function dropdown (vnode) {
   }
 
   function handleFocusOut (event) {
-    collapsed = true;
-    m.redraw();
+    if (!vnode.dom.contains(event.relatedTarget)) {
+      collapsed = true;
+      m.redraw();
+    }
   }
 
   function handleHeadClick (event) {
