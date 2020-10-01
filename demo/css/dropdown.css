@@ -18,9 +18,13 @@ mui-dropdown-head {
   cursor: pointer;
 }
 
+mui-dropdown-body a {
+  color: black;
+}
 mui-dropdown-body {
   z-index: 100000;
   background-color: white;
+  color: black;
   position: absolute;
   display: inline-block;
   font-family: arial;
@@ -48,7 +52,13 @@ mui-dropdown-body {
   white-space: nowrap;
 }
 
-mui-dropdown > mui-dropdown-body > * {
+mui-dropdown-body > hr {
+  border-color: black;
+  padding: 0;
+  margin: 6px 0 6px 0;
+}
+
+mui-dropdown > mui-dropdown-body > div {
   display: block;
   padding: 5px;
 }
