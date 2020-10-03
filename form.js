@@ -34,7 +34,7 @@ function form (vnode) {
           options.fields.map(field => {
             return m('div',
               {
-                class: 'form-group'
+                class: 'form-group' + (field.errors ? ' had-error' : '')
               },
               field.component.handlesOwnLabel ? null : m('label', { for: state.formId + '_' + field.name }, field.label),
               field.errors ? renderErrors(field.errors) : null,
