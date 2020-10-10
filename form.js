@@ -26,6 +26,10 @@ function form (vnode) {
     view: (vnode) => {
       const options = vnode.attrs;
 
+      vnode.attrs.fields.forEach(field => {
+        state[field.name] = state[field.name] || field.initialValue;
+      });
+
       return m('mui-form',
         m('form',
           {
@@ -42,6 +46,7 @@ function form (vnode) {
                 {
                   id: state.formId + '_' + field.name,
                   ...field,
+                  value: state[field.name],
                   onInput: handleInput(state, options)
                 })
             );

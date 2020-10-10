@@ -63,6 +63,12 @@ mui-dropdown > mui-dropdown-body > div {
   padding: 5px;
 }
 
+mui-dropdown > mui-dropdown-body > div > a {
+  text-decoration: none;
+  padding: 8px;
+  display: block;
+}
+
 mui-dropdown.align-right mui-dropdown-body {
   min-width: 24px;
   right: 0;

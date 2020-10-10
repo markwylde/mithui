@@ -1,23 +1,22 @@
 const m = require('mithril');
 
-function handleInput (state, options) {
+function handleInput (options) {
   return event => {
-    state.value = event.target.value;
     options.onInput && options.onInput(event, {
       name: options.name,
-      value: state.value
+      value: event.target.value
     });
   };
 }
 
 function select (vnode) {
-  const state = {
-    value: vnode.attrs.initialValue || false
-  };
-
   return {
     oncreate: (vnode) => {
-      vnode.dom.querySelector('select').value = state.value;
+      vnode.dom.querySelector('select').value = vnode.attrs.value;
+    },
+
+    onupdate: (vnode) => {
+      vnode.dom.querySelector('select').value = vnode.attrs.value;
     },
 
     view: (vnode) => {
@@ -28,7 +27,7 @@ function select (vnode) {
           id: options.id,
           autoFocus: options.autoFocus,
           name: options.name,
-          oninput: handleInput(state, options)
+          oninput: handleInput(options)
         },
         options.options.map(option =>
           m('option', { value: option.value }, option.label)
