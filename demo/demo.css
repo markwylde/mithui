@@ -1,3 +1,11 @@
+@import "../css/checkbox.css";
+@import "../css/core.css";
+@import "../css/dropdown.css";
+@import "../css/fileInput.css";
+@import "../css/multilineInput.css";
+@import "../css/select.css";
+@import "../css/textInput.css";
+
 * {
   box-sizing: border-box;
 }

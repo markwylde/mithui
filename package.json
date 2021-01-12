@@ -7,9 +7,9 @@
   "author": "",
   "license": "MIT",
   "scripts": {
-    "demo:build": "cat demo/css/*.css > demo/style.bundle.css && node_modules/.bin/browserify -g uglifyify ./demo/index.js --noparse clone > ./demo/index.bundle.js",
+    "demo:build": "cssbun -o demo/index.bundle.css demo/demo.css && node_modules/.bin/browserify -g uglifyify ./demo/index.js --noparse clone > ./demo/index.bundle.js",
     "demo:watch:js": "node_modules/.bin/watchify -d -o ./demo/index.bundle.js ./demo/index.js",
-    "demo:watch:css": "cd demo && nodemon -w css -e 'css' --exec 'cat css/*.css > style.bundle.css'",
+    "demo:watch:css": "cssbun -w \"css/*.css\" -o demo/index.bundle.css demo/demo.css",
     "demo:watch": "npm run demo:watch:js & npm run demo:watch:css",
     "demo:serve": "node_modules/.bin/ws -d ./demo --spa index.html",
     "demo:start": "npm run demo:watch & npm run demo:serve",
@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "autosize": "^4.0.2",
+    "cssbun": "^1.1.11",
     "mithril": "^2.0.4"
   },
   "devDependencies": {
