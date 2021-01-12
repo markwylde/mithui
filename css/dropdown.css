@@ -60,13 +60,18 @@ mui-dropdown-body > hr {
 
 mui-dropdown > mui-dropdown-body > div {
   display: block;
-  padding: 5px;
 }
 
+mui-dropdown > mui-dropdown-body > div:hover {
+  background-color: blue;
+}
+mui-dropdown > mui-dropdown-body > div:hover > a {
+  color: white;
+}
 mui-dropdown > mui-dropdown-body > div > a {
   text-decoration: none;
-  padding: 8px;
   display: block;
+  padding: 8px 5px;
 }
 
 mui-dropdown.align-right mui-dropdown-body {
