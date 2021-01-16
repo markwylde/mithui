@@ -1,31 +1,26 @@
 const m = require('mithril');
 
-function handleInput (options, state, file) {
-  return event => {
-    file.name = event.target.value;
-    options.onInput && options.onInput(event, {
-      name: options.name,
-      value: state.value
-    });
-  };
-}
+// function handleInput (options, state, setState, file) {
+//   return event => {
+//     file.name = event.target.value;
+//     options.onInput && options.onInput(event, {
+//       name: options.name,
+//       value: state.value
+//     });
+//   };
+// }
 
-function handleChange (options, state) {
+function handleChange (options, state, setState) {
   return event => {
     const files = Array.from(event.target.files);
-    state.value = state.value.concat(files.map(file => {
+    const newState = state.value.concat(files.map(file => {
       return {
         name: (options.prefix || '') + file.name,
         file
       };
     }));
 
-    event.target.value = null;
-
-    options.onInput && options.onInput(event, {
-      name: options.name,
-      value: state.value
-    });
+    setState({ value: newState });
   };
 }
 
@@ -37,36 +32,42 @@ function removeDragOverClass (event) {
   event.target.parentNode.classList.remove('dragover');
 }
 
-function removeFile (options, state, fileToDelete) {
+function removeFile (options, state, setState, fileToDelete) {
   return event => {
-    event.preventDefault();
-    state.value = state.value.filter(file => file !== fileToDelete);
-    options.onInput && options.onInput(event, {
-      name: options.name,
-      value: state.value
-    });
+    const newState = state.value.filter(file => file !== fileToDelete);
+    setState({ value: newState });
   };
 }
 
 function filePicker (vnode) {
-  const state = {
+  const options = vnode.attrs;
+
+  let state = {
     value: vnode.attrs.initialValue || []
   };
 
-  return {
-    view: (vnode) => {
-      const options = vnode.attrs;
+  function setState (newState) {
+    state = newState;
+    vnode.attrs.value = state.value;
+    vnode.dom.value = state.value;
+  }
 
-      return m('mui-file-picker',
+  return {
+    oncreate: (vnode) => {
+      setState(state);
+    },
+
+    view: (vnode) => {
+      return m('mui-file-picker', { name: options.name },
         m('ul', state.value.map((file, fileIndex) =>
           m('li', { key: file },
             m('input',
               {
-                oninput: handleInput(options, state, file),
+                // oninput: handleInput(options, state, setState, file),
                 oncreate: event => { event.dom.value = file.name; }
               }
             ),
-            m('button', { onclick: removeFile(options, state, file) }, 'X')
+            m('button', { onclick: removeFile(options, state, setState, file) }, 'X')
           )
         )),
         m('div',
@@ -79,13 +80,14 @@ function filePicker (vnode) {
             multiple: 'multiple',
             id: options.id,
             autofocus: options.autoFocus,
-            name: options.name,
-            onchange: handleChange(options, state)
+            onchange: handleChange(options, state, setState)
           })
         )
       );
     }
   };
 }
+
+filePicker.handlesOwnLabel = false;
 
 module.exports = filePicker;

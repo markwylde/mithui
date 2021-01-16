@@ -6,52 +6,39 @@ function renderErrors (errors) {
   }, errors.map(error => m('li', error)));
 }
 
-function handleInput (state, options) {
-  return (event, data) => {
-    state[data.name] = data.value;
-    options.onInput && options.onInput(state);
-  };
-}
-
 function form (vnode) {
   const state = {
     formId: Math.floor(Math.random() * 1e16)
   };
 
-  vnode.attrs.fields.forEach(field => {
+  vnode.children.forEach(field => {
     state[field.name] = field.initialValue;
   });
 
   return {
     view: (vnode) => {
-      const options = vnode.attrs;
-
-      vnode.attrs.fields.forEach(field => {
+      vnode.children.forEach(field => {
         state[field.name] = state[field.name] || field.initialValue;
       });
 
       return m('mui-form',
         m('form',
           {
-            onsubmit: event => options.onSubmit && options.onSubmit(event, state)
+            onsubmit: vnode.attrs.onsubmit
           },
-          options.fields.map(field => {
+          vnode.children.map(fieldVnode => {
+            const attrs = fieldVnode.attrs || {};
+            attrs.id = attrs.id || window.btoa(Date.now() + '.' + Math.random());
+
             return m('div',
               {
-                class: 'form-group' + (field.errors ? ' had-error' : '')
+                class: 'form-group' + (attrs.errors ? ' had-error' : '')
               },
-              field.component.handlesOwnLabel ? null : m('label', { for: state.formId + '_' + field.name }, field.label),
-              field.errors ? renderErrors(field.errors) : null,
-              m(field.component,
-                {
-                  id: state.formId + '_' + field.name,
-                  ...field,
-                  value: state[field.name],
-                  onInput: handleInput(state, options)
-                })
+              fieldVnode.tag.handlesOwnLabel === false ? m('label', { for: attrs.id }, attrs.label) : null,
+              attrs.errors ? renderErrors(attrs.errors) : null,
+              fieldVnode
             );
-          }),
-          m('button', 'Submit')
+          })
         )
       );
     }

@@ -38,4 +38,6 @@ function multilineInput (vnode) {
   };
 }
 
+multilineInput.handlesOwnLabel = false;
+
 module.exports = multilineInput;

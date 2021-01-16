@@ -90,4 +90,6 @@ function dropdown (vnode) {
   };
 }
 
+dropdown.handlesOwnLabel = false;
+
 module.exports = dropdown;

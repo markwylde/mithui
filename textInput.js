@@ -11,6 +11,8 @@ function handleInput (state, options) {
 }
 
 function textInput (vnode) {
+  const id = vnode.attrs.id || window.btoa(Date.now() + '.' + Math.random());
+
   const state = {
     value: vnode.attrs.initialValue || ''
   };
@@ -25,7 +27,7 @@ function textInput (vnode) {
 
       return m('mui-text-input',
         m('input', {
-          id: options.id,
+          id,
           autoFocus: options.autoFocus,
           name: options.name,
           oninput: handleInput(state, options)
@@ -34,5 +36,7 @@ function textInput (vnode) {
     }
   };
 }
+
+textInput.handlesOwnLabel = false;
 
 module.exports = textInput;

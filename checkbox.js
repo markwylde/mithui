@@ -1,16 +1,8 @@
 const m = require('mithril');
 
-function handleInput (state, options) {
-  return event => {
-    state.value = !!event.target.checked;
-    options.onInput && options.onInput(event, {
-      name: options.name,
-      value: state.value
-    });
-  };
-}
-
 function checkbox (vnode) {
+  const id = vnode.attrs.id || window.btoa(Date.now() + '.' + Math.random());
+
   const state = {
     value: vnode.attrs.initialValue || false
   };
@@ -25,14 +17,13 @@ function checkbox (vnode) {
 
       return m('mui-checkbox',
         m('input', {
-          id: options.id,
+          id,
           type: 'checkbox',
           autoFocus: options.autoFocus,
-          name: options.name,
-          oninput: handleInput(state, options)
+          name: options.name
         }),
         m('label', {
-          for: options.id
+          for: id
         }, options.label)
       );
     }

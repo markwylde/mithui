@@ -10,7 +10,7 @@ function handleInput (state, options) {
   };
 }
 
-function textInput (vnode) {
+function passwordInput (vnode) {
   const state = {
     value: vnode.attrs.initialValue || ''
   };
@@ -36,4 +36,6 @@ function textInput (vnode) {
   };
 }
 
-module.exports = textInput;
+passwordInput.handlesOwnLabel = false;
+
+module.exports = passwordInput;
