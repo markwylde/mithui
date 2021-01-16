@@ -94,19 +94,19 @@ const mui = require('mithui');
 h(
   'div',
   { class: 'someForm' },
-  mithril(mui.form, {
-    fields: [{
+  mithril(mui.form, 
+    m('textInput', {
       name: 'firstName',
       label: 'First Name',
-      component: createTextInput,
       autoFocus: true,
       initialValue: 'Joe'
-    }, {
+    }),
+    
+    m('textInput', {
       name: 'lastName',
       label: 'Last Name',
-      component: createTextInput,
       initialValue: 'Bloggs'
-    }
+    })
   )
 )
 ```
