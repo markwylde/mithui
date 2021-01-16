@@ -1,16 +1,8 @@
 const m = require('mithril');
 
-function handleInput (state, options) {
-  return event => {
-    state.value = event.target.value;
-    options.onInput && options.onInput(event, {
-      name: options.name,
-      value: state.value
-    });
-  };
-}
-
 function passwordInput (vnode) {
+  const id = vnode.attrs.id || window.btoa(Date.now() + '.' + Math.random());
+
   const state = {
     value: vnode.attrs.initialValue || ''
   };
@@ -25,11 +17,9 @@ function passwordInput (vnode) {
 
       return m('mui-text-input',
         m('input', {
-          id: options.id,
+          id,
           type: 'password',
-          autoFocus: options.autoFocus,
-          name: options.name,
-          oninput: handleInput(state, options)
+          ...options
         })
       );
     }

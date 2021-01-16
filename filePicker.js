@@ -1,15 +1,5 @@
 const m = require('mithril');
 
-// function handleInput (options, state, setState, file) {
-//   return event => {
-//     file.name = event.target.value;
-//     options.onInput && options.onInput(event, {
-//       name: options.name,
-//       value: state.value
-//     });
-//   };
-// }
-
 function handleChange (options, state, setState) {
   return event => {
     const files = Array.from(event.target.files);
@@ -63,7 +53,6 @@ function filePicker (vnode) {
           m('li', { key: file },
             m('input',
               {
-                // oninput: handleInput(options, state, setState, file),
                 oncreate: event => { event.dom.value = file.name; }
               }
             ),

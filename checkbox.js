@@ -19,8 +19,7 @@ function checkbox (vnode) {
         m('input', {
           id,
           type: 'checkbox',
-          autoFocus: options.autoFocus,
-          name: options.name
+          ...options
         }),
         m('label', {
           for: id

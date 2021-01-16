@@ -69,6 +69,14 @@ function formsPage () {
                 initialValue: 'Bloggs'
               }),
 
+              m(mui.textInput, {
+                name: 'email',
+                label: 'Email',
+                type: 'email',
+                errors: errors.email,
+                initialValue: 'test@example.com'
+              }),
+
               m(mui.multilineInput, {
                 name: 'bio',
                 label: 'Profile Bio',

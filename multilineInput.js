@@ -1,17 +1,9 @@
 const m = require('mithril');
 const autosize = require('autosize');
 
-function handleInput (state, options) {
-  return event => {
-    state.value = event.target.value;
-    options.onInput && options.onInput(event, {
-      name: options.name,
-      value: state.value
-    });
-  };
-}
-
 function multilineInput (vnode) {
+  const id = vnode.attrs.id || window.btoa(Date.now() + '.' + Math.random());
+
   const state = {
     value: vnode.attrs.initialValue || ''
   };
@@ -28,10 +20,8 @@ function multilineInput (vnode) {
 
       return m('mui-multiline-input',
         m('textarea', {
-          id: options.id,
-          autoFocus: options.autoFocus,
-          name: options.name,
-          oninput: handleInput(state, options)
+          id,
+          ...options
         })
       );
     }
