@@ -9,7 +9,7 @@ A ui library for mithril.
 ## Available Components
 ### Dropdown
 ```javascript
-mithril(mui.dropdown, [
+m(mui.dropdown, [
   m('div', 'Item 1'),
   m('div', 'Item 2'),
   m('div', 'Item 3'),
@@ -19,33 +19,30 @@ mithril(mui.dropdown, [
 ### Forms
 ### Text Input
 ```javascript
-{
+m(mui.textInput, {
   name: 'firstName',
   label: 'First Name',
   errors: errors.firstName,
-  component: mui.textInput,
   autoFocus: true,
   initialValue: 'Joe'
-}
+})
 ```
 ### Multiline Input
 ```javascript
-{
+m(mui.multilineInput, {
   name: 'bio',
   label: 'Profile Bio',
   errors: errors.lastName,
-  component: mui.multilineInput,
   initialValue: 'Some cool information about me'
-}
+})
 ```
 
 ### Select
 ```javascript
-{
+m(mui.select, {
   name: 'location',
   label: 'Location',
   errors: errors.location,
-  component: mui.select,
   options: [
     {
       value: 'au',
@@ -57,52 +54,51 @@ mithril(mui.dropdown, [
     }
   ],
   initialValue: 'uk'
-}
+})
 ```
 
 ### Checkbox
 ```javascript
-{
+m(mui.checkbox, {
   name: 'active',
   label: 'Active',
   errors: errors.active,
-  component: mui.checkbox,
   initialValue: true
-}
+})
 ```
 
 ### File Picker
 ```javascript
-{
+m(mui.filePicker, {
   name: 'pictures',
   label: 'Profile Pictures',
   errors: errors.picture,
   prefix: '/data/avatars/',
-  component: mui.filePicker,
   multiple: true,
   initialValue: [{
     name: 'bbb.txt',
     id: 12
   }]
-}
+})
 ```
 
 ## Example Usage
 ```javascript
+const m = require('mithril');
 const mui = require('mithui');
 
-h(
+m(
   'div',
   { class: 'someForm' },
-  mithril(mui.form, 
-    m('textInput', {
+  m(mui.form,
+    m(mui.textInput, {
       name: 'firstName',
       label: 'First Name',
       autoFocus: true,
       initialValue: 'Joe'
     }),
     
-    m('textInput', {
+    m(mui.textInput, {
       name: 'lastName',
       label: 'Last Name',
       initialValue: 'Bloggs'
