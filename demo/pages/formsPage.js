@@ -105,7 +105,13 @@ function formsPage () {
                 name: 'active',
                 label: 'Active',
                 errors: errors.active,
-                component: mui.checkbox,
+                initialValue: true
+              }),
+
+              m(mui.checkbox, {
+                name: 'largeCheckbox',
+                label: 'An example of a large checkbox that spans multiple lines, keeping the box on the left.',
+                errors: errors.active,
                 initialValue: true
               }),
 
@@ -125,7 +131,6 @@ function formsPage () {
                 name: 'failOnSubmit',
                 label: 'Fail on submit',
                 errors: errors.failOnSubmit,
-                component: mui.checkbox,
                 initialValue: false
               }),
 
