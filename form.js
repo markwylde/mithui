@@ -11,13 +11,15 @@ function form (vnode) {
     formId: Math.floor(Math.random() * 1e16)
   };
 
-  vnode.children.forEach(field => {
-    state[field.name] = field.initialValue;
-  });
-
   return {
     view: (vnode) => {
-      vnode.children.forEach(field => {
+      const children = vnode.children.filter(child => !!child);
+
+      children.forEach(field => {
+        state[field.name] = field.initialValue;
+      });
+
+      children.forEach(field => {
         state[field.name] = state[field.name] || field.initialValue;
       });
 
@@ -26,7 +28,7 @@ function form (vnode) {
           {
             onsubmit: vnode.attrs.onsubmit
           },
-          vnode.children.map(fieldVnode => {
+          children.map(fieldVnode => {
             const attrs = fieldVnode.attrs || {};
             attrs.id = attrs.id || window.btoa(Date.now() + '.' + Math.random());
 
