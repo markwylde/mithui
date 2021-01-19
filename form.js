@@ -7,27 +7,13 @@ function renderErrors (errors) {
 }
 
 function form (vnode) {
-  const state = {
-    formId: Math.floor(Math.random() * 1e16)
-  };
-
   return {
     view: (vnode) => {
       const children = vnode.children.filter(child => !!child);
 
-      children.forEach(field => {
-        state[field.name] = field.initialValue;
-      });
-
-      children.forEach(field => {
-        state[field.name] = state[field.name] || field.initialValue;
-      });
-
       return m('mui-form',
         m('form',
-          {
-            onsubmit: vnode.attrs.onsubmit
-          },
+          vnode.attrs,
           children.map(fieldVnode => {
             const attrs = fieldVnode.attrs || {};
             attrs.id = attrs.id || window.btoa(Date.now() + '.' + Math.random());
