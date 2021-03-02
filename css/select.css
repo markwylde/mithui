@@ -10,6 +10,7 @@ mui-select select {
   width: 100%;
   padding: var(--input-padding);
   border: 2px solid black;
+  background-color: white;
   font-size: 100%;
 
   -webkit-appearance: none;
