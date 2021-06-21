@@ -21,7 +21,7 @@
     ]
   },
   "dependencies": {
-    "autosize": "^4.0.2",
+    "autosize": "^5.0.0",
     "cssbun": "^1.1.11",
     "mithril": "^2.0.4"
   },
@@ -30,9 +30,8 @@
     "hyperscript": "^2.0.2",
     "hyperx": "^2.5.4",
     "local-web-server": "^4.2.1",
-    "nodemon": "^2.0.7",
-    "semistandard": "^16.0.0",
+    "semistandard": "^16.0.1",
     "uglifyify": "^5.0.2",
-    "watchify": "^3.11.1"
+    "watchify": "^4.0.0"
   }
 }
