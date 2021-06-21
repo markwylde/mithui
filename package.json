@@ -7,11 +7,13 @@
   "author": "",
   "license": "MIT",
   "scripts": {
-    "demo:build": "cssbun -o demo/index.bundle.css demo/demo.css && node_modules/.bin/browserify -g uglifyify ./demo/index.js --noparse clone > ./demo/index.bundle.js",
-    "demo:watch:js": "node_modules/.bin/watchify -d -o ./demo/index.bundle.js ./demo/index.js",
-    "demo:watch:css": "cssbun -w \"css/*.css\" -o demo/index.bundle.css demo/demo.css",
+    "demo:build:js": "esbuild --bundle demo/index.js --outfile=demo/index.bundle.js --minify",
+    "demo:build:css": "esbuild --bundle demo/demo.css --outfile=demo/index.bundle.css --minify",
+    "demo:build": "npm run demo:build:js & npm run demo:build:css",
+    "demo:watch:js": "esbuild --bundle demo/index.js --outfile=demo/index.bundle.js --watch --minify",
+    "demo:watch:css": "esbuild --bundle demo/demo.css --outfile=demo/index.bundle.css --watch --minify",
     "demo:watch": "npm run demo:watch:js & npm run demo:watch:css",
-    "demo:serve": "node_modules/.bin/ws -d ./demo --spa index.html",
+    "demo:serve": "servatron -d ./demo --spa index.html",
     "demo:start": "npm run demo:watch & npm run demo:serve",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -22,16 +24,13 @@
   },
   "dependencies": {
     "autosize": "^5.0.0",
-    "cssbun": "^1.1.11",
     "mithril": "^2.0.4"
   },
   "devDependencies": {
-    "browserify": "^17.0.0",
+    "esbuild": "^0.12.9",
     "hyperscript": "^2.0.2",
     "hyperx": "^2.5.4",
-    "local-web-server": "^4.2.1",
     "semistandard": "^16.0.1",
-    "uglifyify": "^5.0.2",
-    "watchify": "^4.0.0"
+    "servatron": "^1.1.3"
   }
 }
